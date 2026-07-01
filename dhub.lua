@@ -1,11 +1,11 @@
 #!/usr/bin/env lua54
 -- DHub Rejoin - Auto Rejoin & Cookie Inject Script for Redfinger
--- Usage: lua dhub.lua
+-- Pure Lua - No JSON dependency needed
 
-local json = require("json") or {}
 local os = os
 local io = io
 local table = table
+local string = string
 
 -- Color codes
 local colors = {
@@ -34,6 +34,10 @@ local SETTINGS = {
 }
 
 -- Helper Functions
+local function mkdir_p(path)
+    os.execute("mkdir -p " .. path)
+end
+
 local function print_header()
     print(colors.cyan .. colors.bright .. [[
 +======================================+
@@ -285,17 +289,30 @@ local function clear_cache()
     end
 end
 
--- Config Management
+-- Config Management (simple text-based, no JSON needed)
 local function load_config()
     mkdir_p(CACHE_DIR)
     
     if io.open(CONFIG_FILE, "r") then
         log("Loading config from " .. CONFIG_FILE, "info")
-        -- Simple JSON-like config
         local file = io.open(CONFIG_FILE, "r")
-        local content = file:read("*a")
-        file:close()
-        -- Parse config (basic implementation)
+        if file then
+            local line
+            for line in file:lines() do
+                if line:match("^delay_rejoin=") then
+                    SETTINGS.delay_rejoin = tonumber(line:match("=(%d+)"))
+                elseif line:match("^delay_between_launch=") then
+                    SETTINGS.delay_between_launch = tonumber(line:match("=(%d+)"))
+                elseif line:match("^auto_grid=") then
+                    SETTINGS.auto_grid = line:match("=(true)") ~= nil
+                elseif line:match("^grid_rows=") then
+                    SETTINGS.grid_rows = tonumber(line:match("=(%d+)"))
+                elseif line:match("^grid_cols=") then
+                    SETTINGS.grid_cols = tonumber(line:match("=(%d+)"))
+                end
+            end
+            file:close()
+        end
     else
         log("Creating new config file...", "info")
         save_config()
@@ -306,18 +323,16 @@ local function save_config()
     mkdir_p(CACHE_DIR)
     local file = io.open(CONFIG_FILE, "w")
     
-    local config_str = {
-        "delay_rejoin=" .. SETTINGS.delay_rejoin,
-        "delay_between_launch=" .. SETTINGS.delay_between_launch,
-        "auto_grid=" .. tostring(SETTINGS.auto_grid),
-        "grid_rows=" .. SETTINGS.grid_rows,
-        "grid_cols=" .. SETTINGS.grid_cols,
-        "clear_cache=" .. tostring(SETTINGS.clear_cache)
-    }
-    
-    file:write(table.concat(config_str, "\n"))
-    file:close()
-    log("Config saved to " .. CONFIG_FILE, "success")
+    if file then
+        file:write("delay_rejoin=" .. SETTINGS.delay_rejoin .. "\n")
+        file:write("delay_between_launch=" .. SETTINGS.delay_between_launch .. "\n")
+        file:write("auto_grid=" .. tostring(SETTINGS.auto_grid) .. "\n")
+        file:write("grid_rows=" .. SETTINGS.grid_rows .. "\n")
+        file:write("grid_cols=" .. SETTINGS.grid_cols .. "\n")
+        file:write("clear_cache=" .. tostring(SETTINGS.clear_cache) .. "\n")
+        file:close()
+        log("Config saved to " .. CONFIG_FILE, "success")
+    end
 end
 
 -- Menu
