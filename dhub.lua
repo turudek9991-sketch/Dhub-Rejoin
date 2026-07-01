@@ -36,12 +36,12 @@ local SETTINGS = {
 -- Helper Functions
 local function print_header()
     print(colors.cyan .. colors.bright .. [[
-    ╔══════════════════════════════════════╗
-    ║         DHub Rejoin v1.0             ║
-    ║    Auto Rejoin & Cookie Injector     ║
-    ║      For Redfinger Android 10+       ║
-    ╚══════════════════════════════════════╝
-    ]] .. colors.reset)
++======================================+
+|         DHub Rejoin v1.0             |
+|    Auto Rejoin & Cookie Injector     |
+|      For Redfinger Android 10+       |
++======================================+
+]] .. colors.reset)
 end
 
 local function log(msg, level)
@@ -323,19 +323,19 @@ end
 -- Menu
 local function show_menu()
     print(colors.bright .. [[
-╔════════════════════════════════════════╗
-║           DHub Rejoin Menu             ║
-╠════════════════════════════════════════╣
-║ 1. Detect Packages                     ║
-║ 2. Inject Cookie                       ║
-║ 3. Set PlaceID                         ║
-║ 4. Enable Auto Rejoin                  ║
-║ 5. Auto Grid Arrange                   ║
-║ 6. Clear Cache                         ║
-║ 7. Start Auto Monitor                  ║
-║ 8. Settings                            ║
-║ 9. Exit                                ║
-╚════════════════════════════════════════╝
++====================================+
+|         DHub Rejoin Menu           |
++------------------------------------+
+| 1. Detect Packages                 |
+| 2. Inject Cookie                   |
+| 3. Set PlaceID                     |
+| 4. Enable Auto Rejoin              |
+| 5. Auto Grid Arrange               |
+| 6. Clear Cache                     |
+| 7. Start Auto Monitor              |
+| 8. Settings                        |
+| 9. Exit                            |
++====================================+
     ]] .. colors.reset)
 end
 
