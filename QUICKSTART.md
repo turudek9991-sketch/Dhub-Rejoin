@@ -18,6 +18,22 @@ dhub
 
 ---
 
+## ⚡ Jika Ada Error "lua54 not found"
+
+**Cepat:**
+```bash
+pkg install lua54 -y && cd ~/Dhub-Rejoin && ./run-direct.sh
+```
+
+**Atau manual:**
+```bash
+pkg install lua54 -y
+cd ~/Dhub-Rejoin
+lua5.4 dhub.lua
+```
+
+---
+
 ## Menu Guide
 
 ```
