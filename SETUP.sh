@@ -60,30 +60,52 @@ mkdir -p "$INSTALL_DIR"
 # Step 5: Clone or download repo
 echo -e "\033[36m[STEP 5] Downloading DHub Rejoin from GitHub...\033[0m"
 
-# Try git clone first
-if command -v git &> /dev/null; then
-    echo "Using git clone..."
-    cd "$HOME"
-    if [ -d "$INSTALL_DIR/.git" ]; then
-        echo "Repository already exists, pulling latest..."
-        cd "$INSTALL_DIR"
-        git pull origin main
-    else
-        git clone "$REPO_URL" "$INSTALL_DIR"
-        cd "$INSTALL_DIR"
-    fi
-else
-    echo "Git not available, using curl..."
+# Clean up if exists and has conflicts
+if [ -d "$INSTALL_DIR/.git" ]; then
+    echo "Checking for git conflicts..."
     cd "$INSTALL_DIR"
     
-    echo "Downloading dhub.lua..."
-    curl -sSL "$RAW_URL/dhub.lua" -o dhub.lua
+    # Try to resolve conflicts by resetting
+    if git status | grep -q "unmerged\|conflict"; then
+        echo "Git conflict detected, resolving..."
+        git reset --hard HEAD
+        git clean -fd
+    fi
     
-    echo "Downloading README.md..."
-    curl -sSL "$RAW_URL/README.md" -o README.md
+    # Pull latest
+    echo "Pulling latest version..."
+    git pull origin main 2>&1 | head -20
+else
+    # Fresh clone
+    echo "Cloning repository..."
+    cd "$HOME"
     
-    echo "Downloading .gitignore..."
-    curl -sSL "$RAW_URL/.gitignore" -o .gitignore 2>/dev/null || echo ""
+    # Remove if exists but corrupted
+    if [ -d "$INSTALL_DIR" ]; then
+        echo "Removing corrupted directory..."
+        rm -rf "$INSTALL_DIR"
+    fi
+    
+    # Try git clone first
+    if command -v git &> /dev/null; then
+        git clone --depth 1 "$REPO_URL" "$INSTALL_DIR" 2>&1 | head -20
+    fi
+    
+    # Fallback to curl if git unavailable or failed
+    if [ ! -f "$INSTALL_DIR/dhub.lua" ]; then
+        echo "Git unavailable, using curl..."
+        mkdir -p "$INSTALL_DIR"
+        cd "$INSTALL_DIR"
+        
+        echo "Downloading dhub.lua..."
+        curl -sSL "$RAW_URL/dhub.lua" -o dhub.lua
+        
+        echo "Downloading README.md..."
+        curl -sSL "$RAW_URL/README.md" -o README.md
+        
+        echo "Downloading .gitignore..."
+        curl -sSL "$RAW_URL/.gitignore" -o .gitignore 2>/dev/null || echo ""
+    fi
 fi
 
 # Check if download successful

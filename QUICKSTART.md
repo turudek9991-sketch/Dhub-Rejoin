@@ -18,6 +18,26 @@ dhub
 
 ---
 
+## ⚡ Jika Ada Error saat Setup atau jalankan dhub
+
+**Quick Fix (Clean Install):**
+```bash
+rm -rf ~/Dhub-Rejoin
+curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/SETUP.sh | bash
+```
+
+**Atau run langsung tanpa git:**
+```bash
+cd ~/Dhub-Rejoin && lua5.4 dhub.lua
+```
+
+**Atau gunakan fallback:**
+```bash
+cd ~/Dhub-Rejoin && ./run-direct.sh
+```
+
+---
+
 ## ⚡ Jika Ada Error "lua54 not found"
 
 **Cepat:**
