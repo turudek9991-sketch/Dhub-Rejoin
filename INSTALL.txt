@@ -1,27 +1,27 @@
 🚀 DHub Rejoin - One-Command Installation
 
-Jika repository sudah ada di GitHub (https://github.com/turudek9991-sketch/DHub-Rejoin):
+Jika repository sudah ada di GitHub (https://github.com/turudek9991-sketch/Dhub-Rejoin):
 
 Copy-paste command ini di Termux:
 
 ═══════════════════════════════════════════════════════════════
-curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main/SETUP.sh | bash
+curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/SETUP.sh | bash
 ═══════════════════════════════════════════════════════════════
 
 Atau jika prefer manual download:
 
 ═══════════════════════════════════════════════════════════════
-cd ~ && git clone https://github.com/turudek9991-sketch/DHub-Rejoin.git && cd DHub-Rejoin && lua54 dhub.lua
+cd ~ && git clone https://github.com/turudek9991-sketch/Dhub-Rejoin.git && cd Dhub-Rejoin && lua54 dhub.lua
 ═══════════════════════════════════════════════════════════════
 
 Atau paling simpel (tanpa git):
 
 ═══════════════════════════════════════════════════════════════
-mkdir -p ~/DHub-Rejoin && cd ~/DHub-Rejoin && \
-curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main/dhub.lua -o dhub.lua && \
-curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main/README.md -o README.md && \
+mkdir -p ~/Dhub-Rejoin && cd ~/Dhub-Rejoin && \
+curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/dhub.lua -o dhub.lua && \
+curl -sSL https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/README.md -o README.md && \
 chmod +x dhub.lua && \
-echo "alias dhub='cd ~/DHub-Rejoin && lua54 dhub.lua'" >> ~/.bashrc && \
+echo "alias dhub='cd ~/Dhub-Rejoin && lua54 dhub.lua'" >> ~/.bashrc && \
 source ~/.bashrc && \
 dhub
 ═══════════════════════════════════════════════════════════════

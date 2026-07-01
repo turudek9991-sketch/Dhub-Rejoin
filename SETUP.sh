@@ -12,8 +12,8 @@ echo "╚═══════════════════════�
 echo -e "\033[0m"
 
 # Configuration
-REPO_URL="https://github.com/turudek9991-sketch/DHub-Rejoin"
-RAW_URL="https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main"
+REPO_URL="https://github.com/turudek9991-sketch/Dhub-Rejoin"
+RAW_URL="https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main"
 INSTALL_DIR="$HOME/DHub-Rejoin"
 
 # Step 1: Update packages

@@ -26,7 +26,7 @@
 Buka Termux di device Redfinger kamu, copy-paste command ini:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main/SETUP.sh | bash
+curl -sL https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/SETUP.sh | bash
 ```
 
 Atau manual:
@@ -36,7 +36,7 @@ pkg update && pkg upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Optio
 pkg install lua54 curl sqlite -y && \
 mkdir -p ~/DHub-Rejoin && \
 cd ~/DHub-Rejoin && \
-curl -o dhub.lua https://raw.githubusercontent.com/turudek9991-sketch/DHub-Rejoin/main/dhub.lua && \
+curl -o dhub.lua https://raw.githubusercontent.com/turudek9991-sketch/Dhub-Rejoin/main/dhub.lua && \
 chmod +x dhub.lua && \
 lua54 dhub.lua
 ```
@@ -264,7 +264,7 @@ crontab -e
 ## Support
 
 **Issues?**
-- GitHub: https://github.com/turudek9991-sketch/DHub-Rejoin/issues
+- GitHub: https://github.com/turudek9991-sketch/Dhub-Rejoin/issues
 - Termux Forum: https://github.com/termux/termux-app
 
 ## License
